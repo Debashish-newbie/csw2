@@ -4,6 +4,9 @@ from django.utils import timezone
 from django.conf import settings
 
 # Create your models here.
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 class Post(models.Model):
     class Status(models.TextChoices):
         DRAFT = 'DF', 'Draft'
@@ -16,6 +19,8 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='blog_posts'
     )
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # Our custom manager.
     body = models.TextField()
     status = models.CharField(
         max_length=2,
