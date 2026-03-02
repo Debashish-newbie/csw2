@@ -5,12 +5,29 @@
     </head>
     <body>
         <h1>Student List</h1>
-        <ul>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>SL NO</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Roll</th>
+                    <th>Created At</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for s in students %}
-                <li>
-                    {{ s.name }} - {{ s.age }}
-                </li>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.age }}</td>
+                    <td>{{ s.roll_no }}</td>
+                    <td>{{ s.created_at }}</td>
+                    <td>{{ s.dept }}</td>
+                </tr>
             {% endfor %}
-        </ul>
+            </tbody>
+        </table>
     </body>
 </html>
