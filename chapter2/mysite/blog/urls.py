@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:id>/', views.post_detail, name='post_detail'),
     # slug converter name must match view parameter 'slug'
     path('<int:year>/<int:month>/<int:day>/<slug:slug>/', views.post_slug_date_detail, name='post_slug_date_detail'),
+    path('<int:post_id>/share/', views.post_share, name='post_share'),
 ]

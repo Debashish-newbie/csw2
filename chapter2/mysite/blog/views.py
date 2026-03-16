@@ -5,6 +5,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.views.generic import ListView
 from .forms import EmailPostForm
 from django.core.mail import send_mail
+from django.views.decorators.http import require_POST
 
 class PostListView(ListView):
     queryset = Post.published.all()
