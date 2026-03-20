@@ -45,16 +45,22 @@ def post_detail(request, id):
             'form': form
         }
     )
-def post_slug_date_detail(request, year, month, day, slug, status):
-    post1 = get_object_or_404(Post, 
-                              status=Post.Status.PUBLISHED,
-                              slug=slug, 
-                              publish__year=year, 
-                              publish__month=month, 
-                              publish__day=day)
+def post_slug_date_detail(request, year, month, day, slug):
+    post1 = get_object_or_404(
+        Post,
+        status=Post.Status.PUBLISHED,
+        slug=slug,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day,
+    )
+    comments = post1.comments.filter(active=True)
+    form = CommentForm()
     return render(
-        request, 'blog/post/detail.html', {'post': post1}
-        )
+        request,
+        'blog/post/detail.html',
+        {'post': post1, 'comments': comments, 'form': form},
+    )
     
 def post_share(request, post_id):
     # get the post
