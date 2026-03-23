@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.conf import settings
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -27,6 +28,7 @@ class Post(models.Model):
         max_length=2,
         choices=Status.choices,
         default=Status.DRAFT)
+    tags = TaggableManager()
     
     publish=models.DateTimeField(default=timezone.now)
     created=models.DateTimeField(auto_now_add=True)#store the date and time when the post is first created
